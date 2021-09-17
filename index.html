@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <h1 class="p-2">{{ title }}</h1>
+      <h1 
+        class="bg-dark text-success p-2"
+        v-if="saldo > 0"
+      >
+        Saldo: <span class="text-white">{{ saldo }},00</span>
+      </h1>
+      <h1
+        class="bg-dark text-danger p-2"
+        v-else
+      >
+        Saldo: <span class="text-white">{{ saldo }},00</span>
+      </h1>
+
+      <div class="row">
+        <div v-show="saldo <= 0" class="col-md-4">
+          <small>Saldo insuficiente para saques.</small>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input v-model.number="value" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+            <button 
+              @click="sendMoney(value)" 
+              class="btn btn-success ml-1"
+            >
+                Depositar
+              </button>
+          </div>
+        </div>
+        <div v-show="saldo > 0" class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input v-model.number="value" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+            <button 
+              @click="getMoney(value)" 
+              class="btn btn-danger ml-1"
+              >
+                Sacar
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="./app.js"></script>
+  <script>
+    const mountedApp = app.mount('#app')
+  </script>
+</body>
+</html>
